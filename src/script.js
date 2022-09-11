@@ -195,8 +195,11 @@ function render(codeTemplate, placeholder) {
 }
 
 function changeImagesByClick(event){
+  event.preventDefault();
+  let name=null;
+  (event.target.id) ? (name=event.target.id) : (name=event.target.className);
   const imgFiltreById = animalList.filter(
-    (kindOfAnimal) => kindOfAnimal.species === event.target.id
+    (kindOfAnimal) => kindOfAnimal.species === name
   );
   changeImages(imgFiltreById);
 }
