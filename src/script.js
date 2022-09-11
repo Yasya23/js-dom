@@ -142,43 +142,47 @@ const codeTemplate = `
         <div class="img">
           <div class="img__column">
             <img
-              src="${animalList[0].src}" alt="${animalList[0].alt}"
+              src="" alt="" class="img__js"
             />
             <img
-              src="${animalList[10].src}" alt="${animalList[10].alt}"
+              src="" alt="" class="img__js"
             />
             <img
-              src="${animalList[22].src}" alt="${animalList[22].alt}"
-            />
-          </div>
-          <div class="img__column">
-            <img
-            src="${animalList[21].src}" alt="${animalList[21].alt}"
-            />
-            <img
-              src="${animalList[14].src}" alt="${animalList[14].alt}"
-            />
-            <img
-              src="${animalList[3].src}" alt="${animalList[3].alt}"
+              src="" alt="" class="img__js"
             />
           </div>
           <div class="img__column">
             <img
-              src="${animalList[6].src}" alt="${animalList[6].alt}"
+            src="" alt="" class="img__js"
             />
             <img
-              src="${animalList[16].src}" alt="${animalList[16].alt}"
+              src="" alt="" class="img__js"
             />
             <img
-            src="${animalList[8].src}" alt="${animalList[8].alt}"
+              src="" alt="" class="img__js"
+            />
+          </div>
+          <div class="img__column">
+            <img
+              src="" alt="" class="img__js"
+            />
+            <img
+              src="" alt="" class="img__js"
+            />
+            <img
+            src="" alt="" class="img__js"
             />
           </div>
         </div>`;
 
+
+const speciesList=["cat","dog","horses"];
+const getRandomSpecies = (speciesList) => speciesList.sort(() => 0.5 - Math.random());
+const initValueList = getRandomSpecies(animalList).slice(0, 9)
+  
 render(codeTemplate, document.querySelector("main"));
 
 const imgHtml = document.querySelectorAll("img");
-imgHtml.forEach((element) => element.classList.add("img__js"));
 
 const popupIcon = document.querySelector("#popup");
 popupIcon.addEventListener("click", showPopup);
@@ -190,16 +194,21 @@ function render(codeTemplate, placeholder) {
   placeholder.innerHTML = codeTemplate;
 }
 
-function changeImagesByClick(event) {
+function changeImagesByClick(event){
   const imgFiltreById = animalList.filter(
     (kindOfAnimal) => kindOfAnimal.species === event.target.id
   );
-
-  for (let i = 0; i < imgHtml.length; i++) {
-    imgHtml[i].setAttribute("src", imgFiltreById[i].src);
-    imgHtml[i].setAttribute("alt", imgFiltreById[i].alt);
-  }
+  changeImages(imgFiltreById);
 }
+
+function changeImages(animalList) {
+    for (let i = 0; i < imgHtml.length; i++) {
+      imgHtml[i].setAttribute("src", animalList[i].src);
+      imgHtml[i].setAttribute("alt", animalList[i].alt);
+    }
+}
+
+changeImages(initValueList);
 
 function showPopup() {
   menuList.classList.toggle("navigation__none");
