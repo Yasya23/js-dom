@@ -140,33 +140,35 @@ const animalList = [
 
 const popupIcon = document.querySelector("#popup");
 const menuList = document.querySelector(".navigation");
-const mainContent = document.querySelector('.img');
+const mainContent = document.querySelector(".img");
 
-const getRandomSpecies = (speciesList) => speciesList.sort(() => 0.5 - Math.random());
+const getRandomSpecies = (speciesList) =>
+  speciesList.sort(() => 0.5 - Math.random());
 const initValueList = getRandomSpecies(animalList).slice(0, 9);
 
-
-function changeImagesByClick({ target }){
-  if(target.dataset.id) {
-    const targetSpecies = animalList.filter(animal => animal.species == target.dataset.id);
+function changeImagesByClick({ target }) {
+  if (target.dataset.id) {
+    const targetSpecies = animalList.filter(
+      (animal) => animal.species == target.dataset.id
+    );
     render(targetSpecies);
   }
 }
 
 function showPopup() {
-  menuList.classList.toggle("navigation__none");
+  menuList.classList.toggle("navigation__block");
 }
 
 function render(speciesList) {
   const template = speciesList.reduce((gap, species, key) => {
-    if(key === 0 || key % 3) {
+    if (key === 0 || key % 3) {
       gap += `<img class="img__js" src="${species.src}" alt="${species.alt}"></img>`;
     } else {
       gap += `</div><div class='img__column'><img class="img__js" src="${species.src}" alt="${species.alt}"></img>`;
     }
     return gap;
   }, "<div class='img__column'>");
-  
+
   mainContent.innerHTML = template + "</div>";
 }
 
@@ -174,7 +176,7 @@ function init() {
   popupIcon.addEventListener("click", showPopup);
   menuList.addEventListener("click", changeImagesByClick);
 
-  render(initValueList)
+  render(initValueList);
 }
 
-window.addEventListener('DOMContentLoaded', init);
+window.addEventListener("DOMContentLoaded", init);
